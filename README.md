@@ -1,1 +1,2 @@
 # Tetris
+Tetris (Russian: Тетрис)[a] is a puzzle video game created by the Soviet software engineer Alexey Pajitnov in 1985.[1] It has been published by several companies for multiple platforms, most prominently during a dispute over the appropriation of the rights in the late 1980s. After a significant period of publication by Nintendo, the rights reverted to Pajitnov in 1996, who co-founded the Tetris Company with Henk Rogers to manage licensing.
