@@ -7,3 +7,18 @@ A tetromino is a geometric shape composed of four squares, connected orthogonall
 A popular use of tetrominoes is in the video game Tetris created by the Soviet game designer Alexey Pajitnov, which refers to them as tetriminos.[3] The tetrominoes used in the game are specifically the one-sided tetrominoes.
 
 Source : - https://en.wikipedia.org/wiki/Tetromino
+
+
+# Tetrominos Data Implementation
+
+For eg: - 
+This Line Draws "I" Tetromino into the grid
+{ Tetromino.I, new Vector2Int[] { new Vector2Int(-1, 1), new Vector2Int( 0, 1), new Vector2Int( 1, 1), new Vector2Int( 2, 1) } },
+
+![I](https://github.com/milanjoshi601/Tetris/assets/132807484/daff3529-fc54-40f2-943b-845cc7328dd6)
+
+This Line Draws "Z" Tetromino into the grid
+{ Tetromino.Z, new Vector2Int[] { new Vector2Int(-1, 1), new Vector2Int( 0, 1), new Vector2Int( 0, 0), new Vector2Int( 1, 0) } },
+
+![Z](https://github.com/milanjoshi601/Tetris/assets/132807484/c54661eb-feeb-478d-b303-15542b5bcc01)
+
