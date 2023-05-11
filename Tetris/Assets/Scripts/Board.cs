@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
+using TMPro;
 
 public class Board : MonoBehaviour
 {
@@ -10,6 +12,14 @@ public class Board : MonoBehaviour
     public TileBlock activeTile { get; private set; }
     public Vector3Int spawnPos;
     public Vector2Int boardSize = new Vector2Int(10, 20);
+
+    public GameObject gameOverText;
+    
+    public GameObject startAgainButton;
+    
+    public TMP_Text score;
+
+    int scoreData = 1000;
 
     public RectInt Bounds
     {
@@ -32,6 +42,8 @@ public class Board : MonoBehaviour
 
     private void Start()
     {
+        gameOverText.SetActive(false);
+        startAgainButton.SetActive(false);
         SpawnBlock();
     }
 
@@ -41,7 +53,33 @@ public class Board : MonoBehaviour
         TetrominoData data = this.tetrominoData[random];
 
         this.activeTile.Initialize(this, this.spawnPos, data);
-        Set(this.activeTile);
+
+        if (IsValidPos(this.activeTile, this.spawnPos))
+        {
+            Set(this.activeTile);
+        }
+        else
+        {
+            GameOver();
+        }
+
+        
+    }
+
+    void GameOver()
+    {
+        this.tilemap.ClearAllTiles();
+        Time.timeScale = 0;
+        gameOverText.SetActive(true);
+        startAgainButton.SetActive(true);
+        
+    }
+
+    public void StartAgain()
+    {
+        gameOverText.SetActive(false);
+        Time.timeScale = 1;
+        startAgainButton.SetActive(false);
     }
 
     public void Set(TileBlock block)
@@ -84,4 +122,68 @@ public class Board : MonoBehaviour
         }
         return true;
     }
+
+    public void ClearLine()
+    {
+        RectInt bound = this.Bounds;
+        int row = bound.yMin;
+
+        while (row < bound.yMax)
+        {
+            if (IsLineFull(row))
+            {
+                LineClear(row);
+                   
+                score.text = "Score : " + scoreData;
+                scoreData += 1000;
+            }
+            else
+            {
+                row++;
+            }
+        }
+    }
+
+    bool IsLineFull(int row)
+    {
+        RectInt bound = this.Bounds;
+
+        for (int i = bound.xMin; i < bound.xMax; i++)
+        {
+            Vector3Int pos = new Vector3Int(i, row, 0);
+
+            if (!tilemap.HasTile(pos))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    void LineClear(int row)
+    {
+        RectInt bound = this.Bounds;
+
+        for (int i = bound.xMin; i < bound.xMax; i++)
+        {
+            Vector3Int pos = new Vector3Int(i, row, 0);
+            this.tilemap.SetTile(pos, null);
+        }
+
+        while (row < bound.yMax)
+        {
+            for (int i = bound.xMin; i < bound.xMax; i++)
+            {
+                Vector3Int pos = new Vector3Int(i, row + 1, 0);
+                TileBase above = this.tilemap.GetTile(pos);
+
+                pos = new Vector3Int(i, row, 0);
+                tilemap.SetTile(pos, above);
+            }
+
+            row++;
+        }
+    }
+
 }
