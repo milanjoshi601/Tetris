@@ -22,3 +22,7 @@ This Line Draws "Z" Tetromino into the grid
 
 ![Z](https://github.com/milanjoshi601/Tetris/assets/132807484/c54661eb-feeb-478d-b303-15542b5bcc01)
 
+# Tetrominos Rotation
+For tetrominos rotation i have used the following refrence to implement in code
+https://strategywiki.org/wiki/File:Tetris_rotation_super.png
+https://tetris.fandom.com/wiki/Tetris_Wiki
